@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace SistemaDeAlarmes.Models
 {
@@ -12,13 +15,18 @@ namespace SistemaDeAlarmes.Models
         public DbSet<AlarmeAtuado> AlarmesAtuados { get; set; }
         public DbSet<Log> Logs { get; set; }
 
-        private readonly IConfiguration _config;
 
         public AlarmeContext()
         {
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlServer(_config.GetConnectionString("AlarmeConnection"));
+        {
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            .AddJsonFile("appsettings.json")
+            .Build();
+            options.UseSqlServer(configuration.GetConnectionString("AlarmeConnection"));
+        }
     }
 }
