@@ -30,9 +30,8 @@ namespace SistemaDeAlarmes.Controllers
                 model.acao = "Editar";
                 Equipamento equipamento = db.Equipamentos.Find(Id);
                 if (equipamento != null)
-                {
                     model.equipamento = equipamento;
-                }
+                
             }
             return View(model);
         }
@@ -65,7 +64,9 @@ namespace SistemaDeAlarmes.Controllers
                 }
                 else
                 {
-                    return View(new Equipamento());
+                    ViewModelRegistroEquipamento vmEquip = new ViewModelRegistroEquipamento();
+                    vmEquip.equipamento = new Equipamento();
+                    return View(vmEquip);
                 }                
             }
             catch (Exception ex)

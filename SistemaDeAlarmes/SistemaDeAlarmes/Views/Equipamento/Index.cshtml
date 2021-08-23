@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Alarme>
+﻿@model IEnumerable<Equipamento>
 @{
     ViewData["Title"] = "Equipamentos";
 }
@@ -10,24 +10,24 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Descrição</th>
-                    <th>Classificação</th>
-                    <th>Equipamento</th>
+                    <th>Nome</th>
+                    <th>Número de Série</th>
+                    <th>Tipo</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (Alarme a in Model)
+                @foreach (Equipamento e in Model)
                 {
                     <tr>
-                        <td>@a.Descricao</td>
-                        <td>@a.Classificacao</td>
-                        <td>@a.Equipamento.Nome</td>
+                        <td>@e.Nome</td>
+                        <td>@e.NumeroSerie</td>
+                        <td>@e.Tipo</td>
                         <td>
-                            <a href='@Url.Action("Registro", "Alarme", new { id = a.ID })'>
+                            <a href='@Url.Action("Registro", "Equipamento", new { id = e.ID })'>
                                 Editar
-                            </a> | 
-                            <a href='@Url.Action("Deletar", "Alarme", new { id = a.ID })' class="text-danger" onclick="confirm('Deseja realmente remover o registro?')">
+                            </a> |
+                            <a href='@Url.Action("Deletar", "Equipamento", new { id = e.ID })' class="text-danger" onclick="confirm('Deseja realmente remover o registro?')">
                                 Deletar
                             </a>
                         </td>

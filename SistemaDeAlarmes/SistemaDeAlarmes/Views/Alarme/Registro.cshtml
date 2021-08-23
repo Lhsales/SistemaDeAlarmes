@@ -1,0 +1,42 @@
+﻿@using SistemaDeAlarmes.Models.ViewModel
+@model ViewModelRegistroAlarme
+@{
+    ViewData["Title"] = "Alarmes | " + Model.acao;
+}
+<h1>@ViewData["Title"]</h1>
+@using (Html.BeginForm(FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.HiddenFor(model => model.alarme.ID)
+    <input type="hidden" name="acao" value="@Model.acao" />
+    @Html.AntiForgeryToken()
+    <div class="card">
+        <div class="card-body">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label>Descrição</label>
+                @Html.EditorFor(model => model.alarme.Descricao, "Descricao", new { htmlAttributes = new { @class = "form-control col-sm-8" } })
+                @Html.ValidationMessageFor(model => model.alarme.Descricao, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label>Classificação</label>
+                <select class="form-select col-sm-8" id="Tipo" asp-for="alarme.Classificacao" asp-items="Html.GetEnumSelectList<ClassificacaoAlarme>()">
+                    <option selected="selected" value="">Selecione um tipo</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.alarme.Classificacao, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label>Equipamento relacionado</label>
+                @Html.DropDownList("EquipamentoID", Model.equipamentos, htmlAttributes: new { @class = "form-select col-sm-8" })
+                @Html.ValidationMessageFor(model => model.alarme.EquipamentoID, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Registrar" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        @Html.ActionLink("Voltar para lista", "Index")
+    </div>
+}
