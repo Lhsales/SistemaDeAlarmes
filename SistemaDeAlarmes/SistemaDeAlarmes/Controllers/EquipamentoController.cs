@@ -12,6 +12,7 @@ namespace SistemaDeAlarmes.Controllers
     public class EquipamentoController : Controller
     {
         private AlarmeContext db = new AlarmeContext();
+        private LogController logC = new LogController();
         public IActionResult Index()
         {
             IEnumerable<Equipamento> model = new List<Equipamento>();
@@ -51,12 +52,15 @@ namespace SistemaDeAlarmes.Controllers
                         db.Add(equipamento);
                         db.SaveChanges();
                         vm.mensagem = "Equipamento registrado";
+                        logC.inserirLog(new Log() { Acao = "CREATE", Tabela = "EQUIPAMENTOS", Descricao = "Equipamento " + equipamento.Nome + " de ID " + equipamento.ID + " foi registrado." });
                     }
                     else
                     {
                         db.Entry(equipamento).State = EntityState.Modified;
                         db.SaveChanges();
                         vm.mensagem = "Equipamento atualizado";
+
+                        logC.inserirLog(new Log() { Acao = "UPDATE", Tabela = "EQUIPAMENTOS", Descricao = "Equipamento " + equipamento.Nome + " de ID " + equipamento.ID + " foi atualizado." });
                     }
                 }
                 else
@@ -98,6 +102,8 @@ namespace SistemaDeAlarmes.Controllers
                     db.SaveChanges();
                     vm.mensagem = "Equipamento removido com sucesso";
                     vm.deletar = true;
+
+                    logC.inserirLog(new Log() { Acao = "DELETE", Tabela = "EQUIPAMENTOS", Descricao = "Equipamento " + equipamento.Nome + " de ID " + equipamento.ID + " foi removido." });
                 }
                 catch (Exception ex)
                 {

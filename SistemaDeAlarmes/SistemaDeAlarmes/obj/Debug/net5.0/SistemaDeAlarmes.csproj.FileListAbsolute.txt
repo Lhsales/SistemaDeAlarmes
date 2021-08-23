@@ -94,3 +94,4 @@ C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net
 C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net5.0\SistemaDeAlarmes.csprojAssemblyReference.cache
 C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net5.0\Razor\Views\Equipamento\Visualizacao.cshtml.g.cs
 C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net5.0\Razor\Views\Equipamento\Registro.cshtml.g.cs
+C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net5.0\Razor\Views\Log\Index.cshtml.g.cs
