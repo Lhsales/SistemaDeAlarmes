@@ -1,0 +1,41 @@
+﻿@using SistemaDeAlarmes.Models.ViewModel
+@model ViewModelVisualizacaoEquipamento
+@{
+    ViewData["Title"] = "Equipamentos | Visualização";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                @Model.mensagem
+            </div>
+        </div>
+        <br />
+        @if (!Model.erro && !Model.deletar)
+        {
+            <div class="row">
+                <div class="col-md-3"><b>Nome</b></div>
+                <div class="col-md-9">
+                    @Model.equipamento.Nome
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"><b>Número de Série</b></div>
+                <div class="col-md-9">
+                    @Model..equipamento.NumeroSerie
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"><b>Tipo de Equipamento</b></div>
+                <div class="col-md-9">
+                    @Model.equipamento.Tipo
+                </div>
+            </div>
+        }
+    </div>
+    <div class="card-footer">
+        @Html.ActionLink("Voltar para lista", "Index")
+    </div>
+</div>

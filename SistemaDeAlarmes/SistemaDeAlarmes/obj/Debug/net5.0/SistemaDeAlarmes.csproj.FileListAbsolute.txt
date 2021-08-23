@@ -60,7 +60,6 @@ C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\bin\Debug\net
 C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\bin\Debug\net5.0\runtimes\win-x86\native\e_sqlite3.dll
 C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net5.0\SistemaDeAlarmes.csprojAssemblyReference.cache
 C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net5.0\SistemaDeAlarmes.GeneratedMSBuildEditorConfig.editorconfig
 C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net5.0\SistemaDeAlarmes.AssemblyInfoInputs.cache
 C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net5.0\SistemaDeAlarmes.AssemblyInfo.cs
@@ -91,3 +90,7 @@ C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net
 C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net5.0\SistemaDeAlarmes.genruntimeconfig.cache
 C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\bin\Debug\net5.0\Humanizer.dll
 C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net5.0\Razor\Views\Equipamento\Index.cshtml.g.cs
+C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net5.0\SistemaDeAlarmes.csprojAssemblyReference.cache
+C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net5.0\Razor\Views\Equipamento\Visualizacao.cshtml.g.cs
+C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net5.0\Razor\Views\Equipamento\Registro.cshtml.g.cs
