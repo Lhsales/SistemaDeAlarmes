@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Equipamento>
+@{
+    ViewData["Title"] = "Alarmes";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="card">
+    <div class="card-body">
+        <a href="@Url.ActionLink("Registro", "Alarme")" class="btn btn-primary mb-1">Registrar um novo alarme</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Número de Série</th>
+                    <th>Tipo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Equipamento e in Model)
+                {
+                    <tr>
+                        <td>@e.Nome</td>
+                        <td>@e.NumeroSerie</td>
+                        <td>@e.Tipo</td>
+                        <td>
+                            <a href='@Url.Action("Registro", "Equipamento", new { id = e.ID })'>
+                                Editar
+                            </a> |
+                            <a href='@Url.Action("Deletar", "Equipamento", new { id = e.ID })' class="text-danger" onclick="confirm('Deseja realmente remover o registro?')">
+                                Deletar
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

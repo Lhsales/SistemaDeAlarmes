@@ -22,16 +22,16 @@ namespace SistemaDeAlarmes.Controllers
 
         public IActionResult Registro(int? Id)
         {
-            Equipamento model = new Equipamento();
+            ViewModelRegistroEquipamento model = new ViewModelRegistroEquipamento();
             if (Id == null)
-                ViewBag.Acao = "Criar";
+                model.acao = "Criar";
             else
             {
-                ViewBag.Acao = "Editar";
+                model.acao = "Editar";
                 Equipamento equipamento = db.Equipamentos.Find(Id);
                 if (equipamento != null)
                 {
-                    model = equipamento;
+                    model.equipamento = equipamento;
                 }
             }
             return View(model);
