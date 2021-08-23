@@ -12,7 +12,8 @@ namespace SistemaDeAlarmes.Controllers
         private AlarmeContext db = new AlarmeContext();
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Log> logs = db.Logs.ToList().OrderByDescending(x => x.DataCriacao);
+            return View(logs);
         }
 
         public Log inserirLog(Log log)

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Log>
+@{
+    ViewData["Title"] = "Logs";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="card">
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Ação</th>
+                    <th>Tabela</th>
+                    <th>Descrição</th>
+                    <th>Data de criação</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Log l in Model)
+                {
+                    <tr>
+                        <td>@l.Acao</td>
+                        <td>@l.Tabela</td>
+                        <td>@l.Descricao</td>
+                        <td>@l.DataCriacao</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
