@@ -18,6 +18,7 @@ namespace SistemaDeAlarmes.Models
         public DateTime DataCadastro { get; set; }
         public bool Ativo { get; set; } = true;
         public virtual Equipamento Equipamento { get; set; }
+        public virtual AlarmeAtuado AlarmeAtuado { get; set; }
     }
     public enum ClassificacaoAlarme
     {

@@ -118,5 +118,28 @@ namespace SistemaDeAlarmes.Controllers
             }
             return selecao;
         }
+
+        public IActionResult VerificarAlarmesAtuados()
+        {
+            ViewModelVerificarAlarmesAtuados vm = new ViewModelVerificarAlarmesAtuados();
+            vm.alarmes = db.Alarmes.Where(x => x.Ativo).ToList();
+            List<int> maisUsados = db.AlarmesAtuados.GroupBy(x => x.AlarmeID)
+                                                    .OrderByDescending(x => x.Count())
+                                                    .Take(3)
+                                                    .Select(x => x.Key)
+                                                    .ToList();
+            vm.alarmesMaisUtilizados = db.Alarmes.Where(x => maisUsados.Contains(x.ID ?? default(int))).ToList();
+            vm.equipamentos = db.Equipamentos.ToList();
+
+            List<Alarme> todosAlarmesAtivos = new List<Alarme>();
+            foreach (Alarme a in vm.alarmes)
+            {
+                AlarmeAtuado atuado = db.AlarmesAtuados.Where(x => x.AlarmeID == a.ID).OrderByDescending(x => x.ID).FirstOrDefault();
+                a.AlarmeAtuado = atuado;
+                todosAlarmesAtivos.Add(a);
+            }
+            vm.alarmesComAtuados = todosAlarmesAtivos;
+            return View(vm);
+        }
     }
 }
