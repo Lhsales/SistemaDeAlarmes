@@ -110,13 +110,13 @@ namespace SistemaDeAlarmes.Controllers
                 
                 logC.inserirLog(new Log() { Acao = "UPDATE", Tabela = "ALARMES", Descricao = "Alarme '" + alarme.Descricao + "' de ID " + alarme.ID + " foi desativado." });
 
-                vm.mensagem = "Alarme desativado com sucesso.";
+                vm.mensagem = "Alarme deletado com sucesso.";
                 vm.deletar = true;
             }
             catch (Exception ex)
             {
                 vm.erro = true;
-                vm.mensagem = "Alarme não pôde ser desativado: " + ex.Message;
+                vm.mensagem = "Alarme não pôde ser deletado: " + ex.Message;
             }
             return View("Visualizacao", vm);
         }
