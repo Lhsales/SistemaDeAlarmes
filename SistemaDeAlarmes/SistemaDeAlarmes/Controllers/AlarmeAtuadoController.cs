@@ -13,6 +13,7 @@ namespace SistemaDeAlarmes.Controllers
     public class AlarmeAtuadoController : Controller
     {
         private AlarmeContext db = new AlarmeContext();
+        private LogController logC = new LogController();
 
         [HttpGet]
         public IActionResult Index(int alarmeAtuadoID = 0, string mensagem = "", int alarmeID = 0)
@@ -40,7 +41,7 @@ namespace SistemaDeAlarmes.Controllers
             ViewModelIndexAlarmeAtuado vm = new ViewModelIndexAlarmeAtuado();
             AlarmeAtuado alarmeAtuado = null;
             Alarme alarme = null;
-            vm.alarmes = listarAlarmes();
+            vm.alarmes = listarAlarmes(Id);
             if (Id != null)
             {
                 alarme = db.Alarmes.Find(int.Parse(Id));
@@ -71,6 +72,7 @@ namespace SistemaDeAlarmes.Controllers
                 db.SaveChanges();
                 Alarme a = db.Alarmes.Find(int.Parse(Id));
                 mensagem = "Alarme '" + a.Descricao + "' ativado com sucesso!";
+                logC.inserirLog(new Log() { Acao = "CREATE", Tabela = "ALARMESATUADOS", Descricao = "Alarme '" + a.Descricao + "' de ID " + a.ID + " foi ativado." });
             }
             catch (Exception ex)
             {
@@ -96,6 +98,7 @@ namespace SistemaDeAlarmes.Controllers
                 db.SaveChanges();
                 Alarme a = db.Alarmes.Find(alarmeAtuado.AlarmeID);
                 mensagem = "Alarme '" + a.Descricao + "' desativado com sucesso!";
+                logC.inserirLog(new Log() { Acao = "UPDATE", Tabela = "ALARMESATUADOS", Descricao = "Alarme '" + a.Descricao + "' de ID " + a.ID + " foi desativado." });
             }
             catch (Exception ex)
             {
@@ -106,9 +109,14 @@ namespace SistemaDeAlarmes.Controllers
             return RedirectToAction("Index", new { alarmeID = alarmeAtuado.AlarmeID, mensagem = mensagem });
         }
 
-        private List<SelectListItem> listarAlarmes()
+        private List<SelectListItem> listarAlarmes(string Id = "")
         {
-            return db.Alarmes.ToList().Where(x => x.Ativo).OrderByDescending(x => x.Descricao).Select(x => new SelectListItem() { Text = x.Descricao, Value = x.ID.ToString() }).ToList();
+            List<SelectListItem> selecao = db.Alarmes.ToList().Where(x => x.Ativo).OrderByDescending(x => x.Descricao).Select(x => new SelectListItem() { Text = x.Descricao, Value = x.ID.ToString() }).ToList();
+            if (Id != "")
+            {
+                selecao.Find(x => x.Value == Id).Selected = true;
+            }
+            return selecao;
         }
     }
 }

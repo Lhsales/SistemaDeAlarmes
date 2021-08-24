@@ -16,7 +16,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-8">
-                        <select class="form-control select2" id="Id" name="Id" asp-items="Model.alarmes">
+                        <select class="form-control select2_alarmeatuado" id="Id" name="Id" asp-items="Model.alarmes">
                         </select>
                     </div>
                     <div class="col-md-4">
@@ -29,7 +29,7 @@
         {
             <div class="mt-4"></div>
             <div class="dropdown-divider"></div>
-            <div class="text-center">
+            <div class="text-center" id="mensagem">
                 <div class="row">
                     <i>@Model.mensagem</i>
                 </div>
@@ -41,7 +41,7 @@
             <div class="mt-4"></div>
             @if (Model.alarmeAtuado == null)
             {
-                <div class="text-center">
+                <div class="text-center" id="alarme">
                     <div class="row">
                         <h5>Esse alarme está desativado.</h5>
                     </div>
@@ -50,6 +50,10 @@
                         <div class="col-md-5 text-left">
                             @Model.alarmeSelecionado.Descricao
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 text-right"><b>Status</b></div>
+                        <div class="col-md-5 text-left">Off</div>
                     </div>
                     <div class="mt-4"></div>
                     <a class="btn btn-primary" href="@Url.Action("Ativar", "AlarmeAtuado", new { id = Model.alarmeSelecionado.ID })">Ativar</a>
@@ -67,6 +71,10 @@
                         <div class="col-md-5 text-left">
                             @Model.alarmeSelecionado.Descricao
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 text-right"><b>Status</b></div>
+                        <div class="col-md-5 text-left">On</div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 text-right"><b>Data de Entrada</b></div>
