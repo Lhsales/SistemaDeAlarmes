@@ -1,0 +1,42 @@
+﻿@using SistemaDeAlarmes.Models.ViewModel 
+@model ViewModelIndexAlarme
+@{
+    ViewData["Title"] = "Alarmes";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="card">
+    <div class="card-body">
+        <a href="@Url.ActionLink("Registro", "Alarme")" class="btn btn-primary mb-1">Registrar um novo alarme</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Classificação</th>
+                    <th>Equipamento</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Alarme a in Model.alarmes)
+                {
+                    a.Equipamento = Model.equipamentos.First(x => x.ID == a.EquipamentoID);                    
+                    <tr>
+                        <td>@a.Descricao</td>
+                        <td>@a.Classificacao</td>
+                        <td>@a.Equipamento.Nome</td>
+                        <td>
+                            <a href='@Url.Action("Registro", "Alarme", new { id = a.ID })'>
+                                Editar
+                            </a>|
+                            <a href='@Url.Action("Deletar", "Alarme", new { id = a.ID })' class="text-danger" onclick="confirm('Deseja realmente desativar o registro?')">
+                                Desativar
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

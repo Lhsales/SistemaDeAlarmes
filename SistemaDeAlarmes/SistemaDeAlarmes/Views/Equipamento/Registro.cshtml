@@ -1,36 +1,44 @@
-﻿@model Equipamento
+﻿@using SistemaDeAlarmes.Models.ViewModel 
+@model ViewModelRegistroEquipamento
 @{
-    ViewData["Title"] = "Equipamentos | " + ViewBag.Acao;
+    ViewData["Title"] = "Equipamentos | " + Model.acao;
 }
 <h1>@ViewData["Title"]</h1>
 @using (Html.BeginForm(FormMethod.Post, new { @class = "form-horizontal" }))
 {
-    @Html.HiddenFor(model => model.ID)
-    <input type="hidden" name="acao" value="@ViewBag.Acao" />
+    @Html.HiddenFor(model => model.equipamento.ID)
+    <input type="hidden" name="acao" value="@Model.acao" />
     @Html.AntiForgeryToken()
     <div class="card">
         <div class="card-body">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 <label>Nome</label>
-                @Html.EditorFor(model => model.Nome, "Nome", new { htmlAttributes = new { @class = "form-control col-sm-8" } })
-                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.equipamento.Nome, "Nome", new { htmlAttributes = new { @class = "form-control col-sm-8" } })
+                @Html.ValidationMessageFor(model => model.equipamento.Nome, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 <label>Número de Série</label>
-                @Html.EditorFor(model => model.NumeroSerie, "NumeroSerie", new { htmlAttributes = new { @class = "form-control col-sm-8" } })
-                @Html.ValidationMessageFor(model => model.NumeroSerie, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.equipamento.NumeroSerie, "NumeroSerie", new { htmlAttributes = new { @class = "form-control col-sm-8" } })
+                @Html.ValidationMessageFor(model => model.equipamento.NumeroSerie, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 <label>Tipo de equipamento</label>
-                <select class="form-select col-sm-8" id="Tipo" asp-for="Tipo" asp-items="Html.GetEnumSelectList<TipoEquipamento>()">
+                <select class="form-select col-sm-8" id="Tipo" asp-for="equipamento.Tipo" asp-items="Html.GetEnumSelectList<TipoEquipamento>()">
                     <option selected="selected" value="">Selecione um tipo</option>
                 </select>
-                @Html.ValidationMessageFor(model => model.Tipo, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.equipamento.Tipo, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Registrar" class="btn btn-primary" />
+                    @if (Model.acao == "Criar")
+                    {
+                        <input type="submit" value="Registrar" class="btn btn-primary" />
+                    }
+                    else
+                    {
+                        <input type="submit" value="Atualizar" class="btn btn-primary" />
+                    }
                 </div>
             </div>
         </div>

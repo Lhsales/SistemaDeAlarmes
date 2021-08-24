@@ -8,7 +8,7 @@ namespace SistemaDeAlarmes.Models
 {
     public class Equipamento
     {
-        public int ID { get; set; }
+        public int? ID { get; set; }
         [Required(ErrorMessage ="Nome deve ser preenchido")]
         public string Nome { get; set; }
         [Required(ErrorMessage = "Número de Série deve ser preenchido")]
@@ -16,6 +16,7 @@ namespace SistemaDeAlarmes.Models
         [Required(ErrorMessage = "Tipo deve ser selecionado")]
         public TipoEquipamento? Tipo { get; set; }
         public DateTime DataCadastro { get; set; }
+        public bool Ativo { get; set; } = true;
 
         public virtual ICollection<Alarme> Alarmes { get; set; }
     }

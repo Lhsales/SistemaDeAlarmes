@@ -22,17 +22,16 @@ namespace SistemaDeAlarmes.Controllers
 
         public IActionResult Registro(int? Id)
         {
-            Equipamento model = new Equipamento();
+            ViewModelRegistroEquipamento model = new ViewModelRegistroEquipamento();
             if (Id == null)
-                ViewBag.Acao = "Criar";
+                model.acao = "Criar";
             else
             {
-                ViewBag.Acao = "Editar";
+                model.acao = "Editar";
                 Equipamento equipamento = db.Equipamentos.Find(Id);
                 if (equipamento != null)
-                {
-                    model = equipamento;
-                }
+                    model.equipamento = equipamento;
+                
             }
             return View(model);
         }
@@ -65,7 +64,10 @@ namespace SistemaDeAlarmes.Controllers
                 }
                 else
                 {
-                    return View(new Equipamento());
+                    ViewModelRegistroEquipamento vmEquip = new ViewModelRegistroEquipamento();
+                    vmEquip.equipamento = new Equipamento();
+                    vmEquip.acao = acao;
+                    return View(vmEquip);
                 }                
             }
             catch (Exception ex)
@@ -77,6 +79,7 @@ namespace SistemaDeAlarmes.Controllers
             return View("Visualizacao", vm);
         }
 
+        // TODO: Atualizar função de Deletar para apenas desativar
         public IActionResult Deletar(int? Id)
         {
             ViewModelVisualizacaoEquipamento vm = new ViewModelVisualizacaoEquipamento();
