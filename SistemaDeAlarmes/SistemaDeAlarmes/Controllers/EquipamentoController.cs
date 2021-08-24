@@ -11,6 +11,7 @@ namespace SistemaDeAlarmes.Controllers
 {
     public class EquipamentoController : Controller
     {
+        // TODO: Atualizar para não poder registrar 2 numeros de série iguais
         private AlarmeContext db = new AlarmeContext();
         private LogController logC = new LogController();
         public IActionResult Index()
