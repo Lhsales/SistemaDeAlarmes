@@ -15,9 +15,7 @@ namespace SistemaDeAlarmes.Controllers
         private LogController logC = new LogController();
         public IActionResult Index()
         {
-            IEnumerable<Equipamento> model = new List<Equipamento>();
-            model = db.Equipamentos.ToList().OrderBy(x => x.Nome);
-            return View(model);
+            return View(gerarListaEquipamentosAtivos());
         }
 
         public IActionResult Registro(int? Id)
@@ -50,14 +48,14 @@ namespace SistemaDeAlarmes.Controllers
                         equipamento.DataCadastro = DateTime.Now;
                         db.Add(equipamento);
                         db.SaveChanges();
-                        vm.mensagem = "Equipamento registrado";
+                        vm.mensagem = "Equipamento registrado.";
                         logC.inserirLog(new Log() { Acao = "CREATE", Tabela = "EQUIPAMENTOS", Descricao = "Equipamento " + equipamento.Nome + " de ID " + equipamento.ID + " foi registrado." });
                     }
                     else
                     {
                         db.Entry(equipamento).State = EntityState.Modified;
                         db.SaveChanges();
-                        vm.mensagem = "Equipamento atualizado";
+                        vm.mensagem = "Equipamento atualizado.";
 
                         logC.inserirLog(new Log() { Acao = "UPDATE", Tabela = "EQUIPAMENTOS", Descricao = "Equipamento " + equipamento.Nome + " de ID " + equipamento.ID + " foi atualizado." });
                     }
@@ -79,43 +77,48 @@ namespace SistemaDeAlarmes.Controllers
             return View("Visualizacao", vm);
         }
 
-        // TODO: Atualizar função de Deletar para apenas desativar
         public IActionResult Deletar(int? Id)
         {
             ViewModelVisualizacaoEquipamento vm = new ViewModelVisualizacaoEquipamento();
             if (Id == null)
-                return View("Index", db.Equipamentos.ToList().OrderBy(x => x.Nome));
+                return View("Index", gerarListaEquipamentosAtivos());
 
             Equipamento equipamento = db.Equipamentos.Find(Id);
             if (equipamento == null)
-                return View("Index", db.Equipamentos.ToList().OrderBy(x => x.Nome));
+                return View("Index", gerarListaEquipamentosAtivos());
             
-            List<Alarme> alarmes = db.Alarmes.Where(x => x.EquipamentoID == Id).ToList();
+            List<Alarme> alarmes = db.Alarmes.Where(x => x.EquipamentoID == Id && x.Ativo).ToList();
             if (alarmes.Count() > 0)
             {
                 vm.erro = true;
-                vm.mensagem = "Equipamento não pode ser removido pois possui alarmes vinculados. Por gentileza, remova os alarmes vinculados ao equipamento: " + equipamento.Nome;
+                vm.mensagem = "Equipamento não pode ser desativado pois possui alarmes vinculados. Por gentileza, desative os alarmes vinculados ao equipamento: " + equipamento.Nome + ".";
                 return View("Visualizacao", vm);
             }
             else
             {
                 try
                 {
-                    db.Equipamentos.Remove(equipamento);
+                    equipamento.Ativo = false;
+                    db.Entry(equipamento).State = EntityState.Modified;
                     db.SaveChanges();
-                    vm.mensagem = "Equipamento removido com sucesso";
+                    vm.mensagem = "Equipamento desativado com sucesso.";
                     vm.deletar = true;
 
-                    logC.inserirLog(new Log() { Acao = "DELETE", Tabela = "EQUIPAMENTOS", Descricao = "Equipamento " + equipamento.Nome + " de ID " + equipamento.ID + " foi removido." });
+                    logC.inserirLog(new Log() { Acao = "UPDATE", Tabela = "EQUIPAMENTOS", Descricao = "Equipamento " + equipamento.Nome + " de ID " + equipamento.ID + " foi desativado." });
                 }
                 catch (Exception ex)
                 {
                     vm.erro = true;
-                    vm.mensagem = "O equipamento não pôde ser removido: " + ex.Message;
+                    vm.mensagem = "O equipamento não pôde ser desativado: " + ex.Message;
                 }
                 return View("Visualizacao", vm);
             }
 
         }
+
+        public IEnumerable<Equipamento> gerarListaEquipamentosAtivos()
+        {
+            return db.Equipamentos.ToList().Where(x => x.Ativo).OrderBy(x => x.Nome);
+        } 
     }
 }
