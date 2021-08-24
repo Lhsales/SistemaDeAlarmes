@@ -97,3 +97,4 @@ C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net
 C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net5.0\Razor\Views\Log\Index.cshtml.g.cs
 C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net5.0\Razor\Views\Alarme\Index.cshtml.g.cs
 C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net5.0\Razor\Views\Alarme\Registro.cshtml.g.cs
+C:\Lua\Projetos\SistemaDeAlarmes\SistemaDeAlarmes\SistemaDeAlarmes\obj\Debug\net5.0\Razor\Views\Alarme\Visualizacao.cshtml.g.cs

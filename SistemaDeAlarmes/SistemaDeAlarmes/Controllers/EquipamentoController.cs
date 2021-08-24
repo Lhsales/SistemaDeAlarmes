@@ -66,6 +66,7 @@ namespace SistemaDeAlarmes.Controllers
                 {
                     ViewModelRegistroEquipamento vmEquip = new ViewModelRegistroEquipamento();
                     vmEquip.equipamento = new Equipamento();
+                    vmEquip.acao = acao;
                     return View(vmEquip);
                 }                
             }
@@ -78,6 +79,7 @@ namespace SistemaDeAlarmes.Controllers
             return View("Visualizacao", vm);
         }
 
+        // TODO: Atualizar função de Deletar para apenas desativar
         public IActionResult Deletar(int? Id)
         {
             ViewModelVisualizacaoEquipamento vm = new ViewModelVisualizacaoEquipamento();

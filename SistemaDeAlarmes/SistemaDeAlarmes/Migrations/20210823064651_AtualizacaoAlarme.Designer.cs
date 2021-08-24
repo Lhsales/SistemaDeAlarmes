@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SistemaDeAlarmes.Models;
 
 namespace SistemaDeAlarmes.Migrations
 {
     [DbContext(typeof(AlarmeContext))]
-    partial class AlarmeContextModelSnapshot : ModelSnapshot
+    [Migration("20210823064651_AtualizacaoAlarme")]
+    partial class AtualizacaoAlarme
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,13 +23,10 @@ namespace SistemaDeAlarmes.Migrations
 
             modelBuilder.Entity("SistemaDeAlarmes.Models.Alarme", b =>
                 {
-                    b.Property<int?>("ID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
 
                     b.Property<int>("Classificacao")
                         .HasColumnType("int");
@@ -78,13 +77,10 @@ namespace SistemaDeAlarmes.Migrations
 
             modelBuilder.Entity("SistemaDeAlarmes.Models.Equipamento", b =>
                 {
-                    b.Property<int?>("ID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime>("DataCadastro")
                         .HasColumnType("datetime2");

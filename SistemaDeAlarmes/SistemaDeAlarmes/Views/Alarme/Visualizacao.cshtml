@@ -1,0 +1,41 @@
+﻿@using SistemaDeAlarmes.Models.ViewModel
+@model ViewModelVisualizacaoAlarme
+@{
+    ViewData["Title"] = "Alarme | Visualização";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                @Model.mensagem
+            </div>
+        </div>
+        <br />
+        @if (!Model.erro && !Model.deletar)
+        {
+            <div class="row">
+                <div class="col-md-3"><b>Descrição</b></div>
+                <div class="col-md-9">
+                    @Model.alarme.Descricao
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"><b>Classificação</b></div>
+                <div class="col-md-9">
+                    @Model.alarme.Classificacao
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"><b>Equipamento</b></div>
+                <div class="col-md-9">
+                    @Model.alarme.Equipamento.Nome
+                </div>
+            </div>
+        }
+    </div>
+    <div class="card-footer">
+        @Html.ActionLink("Voltar para lista", "Index")
+    </div>
+</div>

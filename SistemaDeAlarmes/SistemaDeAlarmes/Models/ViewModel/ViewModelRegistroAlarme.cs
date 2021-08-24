@@ -10,6 +10,6 @@ namespace SistemaDeAlarmes.Models.ViewModel
     {
         public string acao { get; set; }
         public Alarme alarme { get; set; }
-        public IEnumerable<SelectListItem> equipamentos { get; set; }
+        public List<SelectListItem> equipamentos { get; set; }
     }
 }

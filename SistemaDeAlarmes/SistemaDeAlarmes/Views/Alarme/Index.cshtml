@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Alarme>
+﻿@using SistemaDeAlarmes.Models.ViewModel 
+@model ViewModelIndexAlarme
 @{
     ViewData["Title"] = "Alarmes";
 }
@@ -17,8 +18,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (Alarme a in Model)
+                @foreach (Alarme a in Model.alarmes)
                 {
+                    a.Equipamento = Model.equipamentos.First(x => x.ID == a.EquipamentoID);                    
                     <tr>
                         <td>@a.Descricao</td>
                         <td>@a.Classificacao</td>
@@ -26,9 +28,9 @@
                         <td>
                             <a href='@Url.Action("Registro", "Alarme", new { id = a.ID })'>
                                 Editar
-                            </a> |
-                            <a href='@Url.Action("Deletar", "Alarme", new { id = a.ID })' class="text-danger" onclick="confirm('Deseja realmente remover o registro?')">
-                                Deletar
+                            </a>|
+                            <a href='@Url.Action("Deletar", "Alarme", new { id = a.ID })' class="text-danger" onclick="confirm('Deseja realmente desativar o registro?')">
+                                Desativar
                             </a>
                         </td>
                     </tr>
