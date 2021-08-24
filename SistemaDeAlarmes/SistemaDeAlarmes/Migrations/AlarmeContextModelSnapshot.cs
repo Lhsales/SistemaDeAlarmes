@@ -71,7 +71,8 @@ namespace SistemaDeAlarmes.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AlarmeID");
+                    b.HasIndex("AlarmeID")
+                        .IsUnique();
 
                     b.ToTable("AlarmesAtuados");
                 });
@@ -143,12 +144,17 @@ namespace SistemaDeAlarmes.Migrations
             modelBuilder.Entity("SistemaDeAlarmes.Models.AlarmeAtuado", b =>
                 {
                     b.HasOne("SistemaDeAlarmes.Models.Alarme", "Alarme")
-                        .WithMany()
-                        .HasForeignKey("AlarmeID")
+                        .WithOne("AlarmeAtuado")
+                        .HasForeignKey("SistemaDeAlarmes.Models.AlarmeAtuado", "AlarmeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Alarme");
+                });
+
+            modelBuilder.Entity("SistemaDeAlarmes.Models.Alarme", b =>
+                {
+                    b.Navigation("AlarmeAtuado");
                 });
 
             modelBuilder.Entity("SistemaDeAlarmes.Models.Equipamento", b =>

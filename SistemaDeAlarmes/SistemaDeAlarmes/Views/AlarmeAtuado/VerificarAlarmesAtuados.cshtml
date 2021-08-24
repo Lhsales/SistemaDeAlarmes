@@ -1,0 +1,90 @@
+﻿@using SistemaDeAlarmes.Models.ViewModel
+@model ViewModelVerificarAlarmesAtuados
+@{
+    ViewData["Title"] = "Verificar Alarmes Atuados";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title"><h5>Status dos Alarmes</h5></div>
+            <table class="table" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Data de Entrada</th>
+                        <th>Data de Saída</th>
+                        <th>Status</th>
+                        <th>Equipamento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Alarme a in Model.alarmesComAtuados)
+                    {
+                        a.Equipamento = Model.equipamentos.First(x => x.ID == a.EquipamentoID);
+                        <tr>
+                            <td>@a.Descricao</td>
+                            @if (a.AlarmeAtuado == null)
+                            {
+                                <td>--</td>
+                                <td>--</td>
+                                <td>Off</td>
+                            }
+                            else
+                            {
+                                <td>@a.AlarmeAtuado.DataEntrada</td>
+                                if (a.AlarmeAtuado.Status)
+                                {
+                                    <td>--</td>
+                                    <td>On</td>
+                                }
+                                else
+                                {
+                                    <td>@a.AlarmeAtuado.DataSaida</td>
+                                    <td>Off</td>
+                                }
+                            }
+                            <td>@a.Equipamento.Nome</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="mt-4"></div>
+
+<div class="row">
+    <div class="card col-md-7">
+        <div class="card-body">
+            <div class="card-title"><h5>Alarmes mais utilizados</h5></div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Top</th>
+                        <th>Descrição</th>
+                        <th>Classificação</th>
+                        <th>Equipamento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int c = 1;
+                    }
+                    @foreach (Alarme a in Model.alarmesMaisUtilizados)
+                    {
+                        a.Equipamento = Model.equipamentos.First(x => x.ID == a.EquipamentoID);
+                        <tr>
+                            <td>@c</td>
+                            <td>@a.Descricao</td>
+                            <td>@a.Classificacao</td>
+                            <td>@a.Equipamento.Nome</td>
+                        </tr>
+                        c++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -10,8 +10,8 @@ using SistemaDeAlarmes.Models;
 namespace SistemaDeAlarmes.Migrations
 {
     [DbContext(typeof(AlarmeContext))]
-    [Migration("20210824025815_AtivoAlarmeEEquipamento")]
-    partial class AtivoAlarmeEEquipamento
+    [Migration("20210824121139_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,7 +73,8 @@ namespace SistemaDeAlarmes.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("AlarmeID");
+                    b.HasIndex("AlarmeID")
+                        .IsUnique();
 
                     b.ToTable("AlarmesAtuados");
                 });
@@ -145,12 +146,17 @@ namespace SistemaDeAlarmes.Migrations
             modelBuilder.Entity("SistemaDeAlarmes.Models.AlarmeAtuado", b =>
                 {
                     b.HasOne("SistemaDeAlarmes.Models.Alarme", "Alarme")
-                        .WithMany()
-                        .HasForeignKey("AlarmeID")
+                        .WithOne("AlarmeAtuado")
+                        .HasForeignKey("SistemaDeAlarmes.Models.AlarmeAtuado", "AlarmeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Alarme");
+                });
+
+            modelBuilder.Entity("SistemaDeAlarmes.Models.Alarme", b =>
+                {
+                    b.Navigation("AlarmeAtuado");
                 });
 
             modelBuilder.Entity("SistemaDeAlarmes.Models.Equipamento", b =>

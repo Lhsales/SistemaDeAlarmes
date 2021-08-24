@@ -13,10 +13,11 @@ namespace SistemaDeAlarmes.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NumeroSerie = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NumeroSerie = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Tipo = table.Column<int>(type: "int", nullable: false),
-                    DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,9 +46,11 @@ namespace SistemaDeAlarmes.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Classificacao = table.Column<int>(type: "int", nullable: false),
-                    EquipamentoID = table.Column<int>(type: "int", nullable: false)
+                    EquipamentoID = table.Column<int>(type: "int", nullable: false),
+                    DataCadastro = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -90,7 +93,8 @@ namespace SistemaDeAlarmes.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_AlarmesAtuados_AlarmeID",
                 table: "AlarmesAtuados",
-                column: "AlarmeID");
+                column: "AlarmeID",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
